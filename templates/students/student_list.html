@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <title>Student List</title>
+</head>
+<style>
+        .form-box {
+            border: 2px solid #93deff; /* Chegara ko'k rangda */
+            border-radius: 10px; /* To'rtburchakni yumaloqroq qilish */
+            padding: 20px; /* Ichki bo'shliq */
+            background-color: #f8f9fa; /* Orqa fonni engil kulrang qilish */
+            max-width: 400px; /* Kenglikni cheklash */
+            margin: auto; /* Markazga joylash */
+        }
+        .rounded-input {
+                border-radius: 10px;
+                border: 2px solid #2da6ff ; /* Chegara bilan ko'rinish uchun */
+                padding: 5px; /* Ichki bo'shliq */
+        }
+        .border-with-text::before {
+                content: "Add new student"; /* Yozuv */
+                position: absolute;
+                top: 14%;
+                left: 43%;
+                transform: translate(-50%, -50%); /* Markazlashdirish */
+                background-color: #f8f9fa; /* Yozuv fonini oq qilish */
+                padding: 0 10px; /* Yozuvni chizig'dan ajratish */
+                z-index: 1; /* Yozuvni boshqa kontentdan ustun qilish */
+            }
+        table {
+            width: 50%; /* Jadvalning kengligi */
+            margin: 0 auto;
+            border-radius: 20px;
+
+        }
+
+        table, th, td {
+              border: 2px solid #93deff;
+              border-radius: 10px;
+              border-collapse: separate;
+              background-color: #f8f9fa;
+        }
+
+        th, td {
+            padding: 2px; /* Yozuvlar orasida bo‘shliq */
+            text-align: center; /* Yozuvni chapga joylashtirish */
+        }
+    </style>
+<body style="background-color:powderblue">
+<h1 class="text-center mt-4 " style="background-color:#49b0b2;"><strong>Student List</strong></h1>
+<br>
+<form method="get">
+    {% csrf_token %}
+    <div class="form-box">
+        <div class="mb-3 border-with-text">
+            First name: <input type="text" name="first_name" class="rounded-input">
+        </div>
+        <div class="mb-3">
+            Last name: <input type="text" name="last_name" class="rounded-input">
+        </div>
+        <div class="mb-3">
+            Email: <input type="text" name="email" class="rounded-input">
+        </div>
+        <div class="mb-3">
+            Age: <input type="number" name="age" class="rounded-input">
+        </div>
+        <button type="submit" class="btn btn-primary w-20">Add student</button>
+    </div>
+</form>
+<br>
+<p style="text-align: center; margin:0"><strong>List of Students</strong></p>
+<div>
+    <table>
+        <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+            <th>Age</th>
+        </tr>
+        {% for student in students %}
+            <tr>
+                <td>{{ student.first_name }}</td>
+                <td>{{ student.last_name }}</td>
+                <td>{{ student.email }}</td>
+                <td>{{ student.age }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+</div>
+</body>
+</html>
